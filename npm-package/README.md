@@ -1,0 +1,78 @@
+# @lagentbot/msds-chain-mcp
+
+Chemical safety intelligence for AI-assisted experiment design. Powered by **ChainSDS** — verified, current, and growing.
+
+This is a remote MCP (Model Context Protocol) server providing **24 tools** for chemical safety reasoning — compatibility checks, hazard analysis, PPE recommendations, storage guidance, waste disposal, mixing order safety, exposure limits, transport classification, regulatory compliance (23 lists, 8 jurisdictions), regulatory watch-list cross-reference, SDS version diff, PDF upload, signed SDS document download, chemical substitution, first aid, GHS labels, signed audit reports, and online PubChem GHS fallback for chemicals not yet in the database.
+
+## Quick Start
+
+**Claude Code:**
+```bash
+claude mcp add msds-chain --transport http https://mcp.lagentbot.com/mcp
+```
+Then run `/mcp` and authenticate (browser sign-in). The legacy SSE endpoint
+(`--transport sse https://mcp.lagentbot.com/sse`) still works for SSE-only clients.
+
+**claude.ai (Web):** Search "msds-chain" in Settings > Plugins.
+
+**Any MCP client (manual config):**
+```json
+{
+  "mcpServers": {
+    "msds-chain": {
+      "type": "http",
+      "url": "https://mcp.lagentbot.com/mcp"
+    }
+  }
+}
+```
+
+## API Key
+
+Get a free API key at [msdschain.lagentbot.com](https://msdschain.lagentbot.com) to unlock all tools.
+
+## Tools (24)
+
+| Tool | Description |
+|------|-------------|
+| `batch_safety_check` | One-call report: pairwise compatibility + per-chemical risk warnings |
+| `validate_protocol_chemicals` | Extract chemical names from protocol text or code |
+| `check_chemical_compatibility` | Pairwise compatibility matrix |
+| `check_mixing_order` | Safe addition sequence for reagent pairs |
+| `get_chemical_risk_warnings` | GHS classification, H-codes, signal words |
+| `get_ppe_recommendation` | Gloves, eye, respiratory, body protection |
+| `get_storage_guidance` | Storage class, cabinet type, isolation rules |
+| `get_waste_disposal` | Waste classification and disposal procedures |
+| `get_emergency_response` | Spill, fire, or exposure procedures |
+| `get_exposure_limits` | OEL/TLV/PEL across US, EU, JP, CN, INT |
+| `get_transport_classification` | UN number, hazard class, packing group |
+| `check_regulatory_compliance` | Multi-region compliance status, list-backed for EU, US, CN, JP, CA, AU, SG |
+| `check_regulatory_lists` | Cross-reference a chemical against 23 regulatory watch lists across major jurisdictions |
+| `get_chemical_alternatives` | Safer substitutes for restricted chemicals |
+| `get_sds_section` | Query specific SDS sections (1-16) |
+| `get_sds_document` | Signed download URL (~5 min) for the original SDS/MSDS PDF |
+| `search_chemical_database` | Look up by name, synonym, or CAS number |
+| `ask_chemical_safety` | Natural language catch-all |
+| `create_audit_session` | Full audit with signed PDF report |
+| `get_audit_report` | Download signed audit report |
+| `upload_msds_pdf` | Upload PDF or URL, extract & parse MSDS |
+| `draft_sds_sections` | Draft SDS Sections 8 and 15 for a mixture, every line sourced |
+| `compare_sds_versions` | Hazard-change diff between two SDS versions |
+
+## Coverage — ChainSDS
+
+- 28,000+ chemicals with multi-language aliases (EN/ZH/JA)
+- 8 regulatory jurisdictions (EU/US/CN/JP/KR/CA/AU/SG) + 3 international conventions
+- 5 exposure limit standards (OSHA/ACGIH/EU/JP/CN)
+- 5 languages (EN/ZH/JA/DE/ID)
+- Version tracking — detects a newer SDS and diffs its hazard classification
+
+## Links
+
+- [GitHub](https://github.com/littleblakew/msds-chain-mcp) — Full source code (Python MCP server)
+- [Smithery](https://smithery.ai/servers/lagentbot/msds-chain) — Smithery registry listing
+- [Homepage](https://msdschain.lagentbot.com) — Web app & API key management
+
+## License
+
+MIT
