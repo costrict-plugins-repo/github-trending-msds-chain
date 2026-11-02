@@ -1,0 +1,96 @@
+"""CI-521：每个工具参数都必须在 **schema** 里带 description，枚举型必须自带 enum。
+
+为什么判据打在 `inputSchema` 而不是 docstring 上：docstring 进的是 `Tool.description`，
+`inputSchema.properties.<arg>.description` 是**另一个字段**，客户端选参数值时读的是后者。
+CI-521 之前 23 个工具的 37 个参数写了一整套 `Args:` 散文，schema 里却是 37 个 `null`——
+「写了」和「送到了」是两件事（同族：memory「修了，但没到达真正的消费者」）。
+
+守卫本身按「新增即生效」写：遍历 live registry，不维护参数清单。
+手工清单会腐化——新加一个参数没人记得补，覆盖率静默下降且不报错。
+"""
+import asyncio
+
+import server
+
+# 服务端硬校验取值范围的参数：schema 必须自己声明出来，否则调用方只能靠猜。
+# key = "<tool>.<param>"，value = 期望的 enum 取值集合。
+# 🔴 取值来自服务端的判断本身（backend `direct_api.py` 的
+# `if scenario not in ("spill", "fire", "exposure")`），不是从这里的 schema 抄的——
+# 抄 schema 会让守卫和被守卫的东西同源，永远相等，等于空跑。
+SERVER_VALIDATED_ENUMS = {
+    "get_emergency_response.scenario": {"spill", "fire", "exposure"},
+}
+
+
+def _params():
+    """yield (tool_name, param_name, param_schema) —— 取自 live registry。"""
+    for t in asyncio.run(server.mcp.list_tools()):
+        for name, schema in ((t.input_schema or {}).get("properties") or {}).items():
+            yield t.name, name, schema
+
+
+def test_every_param_has_a_description_in_the_schema():
+    naked = [
+        f"{tool}.{param}"
+        for tool, param, schema in _params()
+        if not (schema.get("description") or "").strip()
+    ]
+    assert not naked, (
+        f"这些参数在 inputSchema 里没有 description：{sorted(naked)}——"
+        f"写进 Annotated[..., Field(description=...)]，光写 docstring 到不了 schema"
+    )
+
+
+def test_server_validated_params_declare_their_enum():
+    by_key = {f"{tool}.{param}": schema for tool, param, schema in _params()}
+    for key, expected in SERVER_VALIDATED_ENUMS.items():
+        assert key in by_key, f"{key} 不在 registry 里了——服务端校验还在吗？改这个守卫前先确认"
+        declared = by_key[key].get("enum")
+        assert declared is not None, (
+            f"{key} 的取值被服务端硬校验，schema 却没有 enum ⇒ 调用方无从得知合法值。"
+            f"把类型写成 Literal[...] 即可"
+        )
+        assert set(declared) == expected, (
+            f"{key} 的 schema enum {sorted(declared)} 与服务端实际接受的 "
+            f"{sorted(expected)} 不一致——两边必须同时改"
+        )
+
+
+def test_bounded_numeric_params_declare_their_bounds():
+    """`section` 的合法范围（GHS-SDS 1-16）由后端硬校验，schema 必须自带上下界。"""
+    by_key = {f"{tool}.{param}": schema for tool, param, schema in _params()}
+    section = by_key["get_sds_section.section"]
+    assert (section.get("minimum"), section.get("maximum")) == (1, 16), (
+        f"get_sds_section.section 的 schema 边界是 "
+        f"{section.get('minimum')}..{section.get('maximum')}，后端接受的是 1..16"
+    )
+
+
+def test_scenario_description_tells_the_client_person_first():
+    """CI-579：接触到人的事故必须选 `exposure`，即使用户说的是「spilled」。
+
+ 事故形状（后端那半的 Dev 实调）：「I spilled HF on my hand」被分到
+    `spill` ⇒ 物质级解毒规程**只在 exposure 注入**，于是载荷里 calcium 一个字都没有，
+    而模型用自己的知识把钙剂补了上去（无出处）。后端那边修的是正则分类；
+    **这一面的「分类器」是客户端模型**，它读的就是这条 description。
+
+    🔴 断言打在 `inputSchema` 上而不是 docstring 上 —— 本文件顶部那条教训：
+    docstring 进的是 `Tool.description`，客户端选**参数值**时读的是 schema 里这个字段。
+    写在 docstring 里等于没写给它看。
+"""
+    schemas = {f"{t}.{p}": s for t, p, s in _params()}
+    desc = (schemas["get_emergency_response.scenario"].get("description") or "").lower()
+    assert "person" in desc, f"没告诉客户端「人优先」：{desc!r}"
+    assert "spilled" in desc and "exposure" in desc, (
+        "必须点名『用户说 spilled 但接触到人时仍选 exposure』这个具体误判，"
+        f"泛泛说一句『按最接近的选』挡不住它：{desc!r}")
+    # 🔴 CI-1020：第二个具体误判，与上面那条**并列**、各钉各的一句。
+    # 形状：「I got burned by <化学品>」这一族。后端那面的分类器把它落到默认档，
+    # 因为 burn/burned/burnt 不在任何一张场景词表里；而 `burning` 属于 fire 一侧
+    # ⇒ **「烧起来了」与「灼伤」互相偷**。后端那半已单独修（正则加了一条人身锚定的判据）。
+    # 这一面的分类器是客户端模型 ⇒ **只能靠措辞**，且必须同时划清 fire 那一侧，
+    # 否则把真燃烧也吸成 exposure —— 那是修这条时自己新开的失效方向。
+    # 变异：把 description 里 burn 那两句删掉 ⇒ 本断言红。
+    assert "burn" in desc, f"没点名「人身灼伤是 exposure」这个误判：{desc!r}"
+    assert "combusting" in desc, (
+        f"只说 burn 是 exposure 会把真火灾也吸过来，必须划清 fire 那一侧：{desc!r}")
