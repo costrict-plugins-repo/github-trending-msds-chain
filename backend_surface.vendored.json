@@ -1,0 +1,1127 @@
+{
+  "_ci822": "本仓是 PUBLIC。这份文件只含后端 /api/v2 契约中**本仓真的调用的那些端点**；后端的内部工具注册表面**刻意不在这里**，见 scripts/refresh_backend_surface.py 的模块 docstring。",
+  "endpoints": [
+    {
+      "body_params": {
+        "chemicals": {
+          "items_type": "string",
+          "required": true,
+          "type": "array"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "suppliers": {
+          "required": false,
+          "type": "object"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/batch-safety",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "chemical": {
+          "required": true,
+          "type": "string"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "use_case": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/chemical-alternatives",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "chemical": {
+          "required": true,
+          "type": "string"
+        },
+        "region": {
+          "required": false,
+          "type": "string"
+        },
+        "supplier": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/compare-sds-versions",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "chemicals": {
+          "items_type": "string",
+          "required": true,
+          "type": "array"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "suppliers": {
+          "required": false,
+          "type": "object"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/compatibility/check",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "chemical": {
+          "required": true,
+          "type": "string"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "regions": {
+          "items_type": "string",
+          "required": false,
+          "type": "array"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/compliance",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "chemical": {
+          "required": true,
+          "type": "string"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "scenario": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/emergency-response",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "chemicals": {
+          "items_type": "string",
+          "required": true,
+          "type": "array"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "region": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/exposure-limits",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "cas_number": {
+          "required": false,
+          "type": "string"
+        },
+        "chemical_name": {
+          "required": false,
+          "type": "string"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/online-search",
+      "query_params": {}
+    },
+    {
+      "body_params": {
+        "chemicals": {
+          "items_type": "string",
+          "required": true,
+          "type": "array"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "suppliers": {
+          "required": false,
+          "type": "object"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/ppe-recommendation",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {},
+      "method": "GET",
+      "path": "/api/v2/recent-chemicals",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "days": {
+          "in": "query",
+          "required": false,
+          "type": "integer"
+        },
+        "limit": {
+          "in": "query",
+          "required": false,
+          "type": "integer"
+        }
+      }
+    },
+    {
+      "body_params": {
+        "chemical": {
+          "required": true,
+          "type": "string"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/regulatory-lists",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "chemicals": {
+          "items_type": "string",
+          "required": true,
+          "type": "array"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "suppliers": {
+          "required": false,
+          "type": "object"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/risk-warnings",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "include_handling": {
+          "required": false,
+          "type": "boolean"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "steps": {
+          "required": true,
+          "type": "array"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/route-review",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {},
+      "method": "GET",
+      "path": "/api/v2/sds-document-url",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "chemical": {
+          "in": "query",
+          "required": true,
+          "type": "string"
+        },
+        "lang": {
+          "in": "query",
+          "required": false,
+          "type": "string"
+        }
+      }
+    },
+    {
+      "body_params": {
+        "ingredients": {
+          "required": true,
+          "type": "array"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "region": {
+          "required": false,
+          "type": "string"
+        },
+        "sections": {
+          "items_type": "integer",
+          "required": false,
+          "type": "array"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/sds-draft",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "chemical": {
+          "required": true,
+          "type": "string"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "section": {
+          "required": true,
+          "type": "integer"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/sds-section",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "chemicals": {
+          "items_type": "string",
+          "required": true,
+          "type": "array"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "suppliers": {
+          "required": false,
+          "type": "object"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/storage-guidance",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "accumulation_fraction": {
+          "required": false,
+          "type": "number"
+        },
+        "adiabatic_rise_k": {
+          "required": false,
+          "type": "number"
+        },
+        "chemical": {
+          "required": false,
+          "type": "string"
+        },
+        "cp_kj_kg_k": {
+          "required": false,
+          "type": "number"
+        },
+        "decomposition_energy_j_g": {
+          "required": false,
+          "type": "number"
+        },
+        "dsc_onset_c": {
+          "required": false,
+          "type": "number"
+        },
+        "ea_kj_mol": {
+          "required": false,
+          "type": "number"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "mtt_c": {
+          "required": false,
+          "type": "number"
+        },
+        "process_temp_c": {
+          "required": false,
+          "type": "number"
+        },
+        "q_ref_w_kg": {
+          "required": false,
+          "type": "number"
+        },
+        "reaction_enthalpy_kj_kg": {
+          "required": false,
+          "type": "number"
+        },
+        "smiles": {
+          "required": false,
+          "type": "string"
+        },
+        "t_ref_c": {
+          "required": false,
+          "type": "number"
+        },
+        "td24_c": {
+          "required": false,
+          "type": "number"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/thermal-hazard",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "chemicals": {
+          "items_type": "string",
+          "required": true,
+          "type": "array"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "suppliers": {
+          "required": false,
+          "type": "object"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/transport-classification",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "jurisdiction": {
+          "required": false,
+          "type": "string"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "msds_id": {
+          "required": true,
+          "type": "integer"
+        },
+        "session_id": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/validate-sds",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Bind-Token": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "jurisdiction": {
+          "required": false,
+          "type": "string"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "session_id": {
+          "required": true,
+          "type": "string"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/validate-sds/session",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Bind-Token": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    },
+    {
+      "body_params": {
+        "chemicals": {
+          "items_type": "string",
+          "required": true,
+          "type": "array"
+        },
+        "lang": {
+          "required": false,
+          "type": "string"
+        },
+        "suppliers": {
+          "required": false,
+          "type": "object"
+        }
+      },
+      "method": "POST",
+      "path": "/api/v2/waste-disposal",
+      "query_params": {
+        "X-API-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Idempotency-Key": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-MCP-Call-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Msds-Session-Id": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "X-Partner-Customer": {
+          "in": "header",
+          "required": false,
+          "type": null
+        },
+        "authorization": {
+          "in": "header",
+          "required": false,
+          "type": null
+        }
+      }
+    }
+  ],
+  "source": {
+    "api_v2_endpoint_count": 23,
+    "api_v2_sha256": "3e43e4143360e621efb8b8011966e2102b91894f0911bccf8dcca97212b2db79",
+    "backend_commit": "1bb1f43f834cbcf18205253e8e8504db64ecae10",
+    "kept": 22,
+    "refreshed_at": "2026-11-04"
+  }
+}
